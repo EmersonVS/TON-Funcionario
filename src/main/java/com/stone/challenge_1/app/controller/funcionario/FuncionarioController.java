@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stone.challenge_1.app.models.repository.FuncionarioRepository;
+import com.stone.challenge_1.app.validators.FuncionarioValidator;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -20,11 +21,17 @@ public class FuncionarioController {
 
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
+	
+	@Autowired
+	private FuncionarioValidator funcionarioValidator;
 
 	@ApiOperation("Get funcionario info")
-	@GetMapping("/{id}")
-	public ResponseEntity<?> GetFuncionario() {
-		return ResponseEntity.ok().build();
+	@GetMapping("/{funcionarioID}")
+	public ResponseEntity<?> GetFuncionario(@PathVariable Long funcionarioID) {
+		if(funcionarioValidator.isFuncionarioCreated(funcionarioID)) {
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 	@ApiOperation("Create funcionario")
@@ -34,14 +41,14 @@ public class FuncionarioController {
 	}
 
 	@ApiOperation("Update funcionario info")
-	@PutMapping("/{id}")
-	public ResponseEntity<?> UpdateFuncionario() {
+	@PutMapping("/{funcionarioID}")
+	public ResponseEntity<?> UpdateFuncionario(@PathVariable Long funcionarioID) {
 		return ResponseEntity.ok().build();
 	}
 
 	@ApiOperation("Delete funcionario")
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> DeleteFuncionario() {
+	@DeleteMapping("/{funcionarioID}")
+	public ResponseEntity<?> DeleteFuncionario(@PathVariable Long funcionarioID) {
 		return ResponseEntity.ok().build();
 	}
 
