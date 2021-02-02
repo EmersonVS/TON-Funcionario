@@ -1,4 +1,4 @@
-package com.stone.challenge_1.app.controller.user;
+package com.stone.challenge_1.app.controller.user.form;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stone.challenge_1.app.controller.user.helpers.DTO.TokenDTO;
-import com.stone.challenge_1.app.controller.user.helpers.form.UserForm;
+import com.stone.challenge_1.app.controller.user.DTO.TokenDTO;
 import com.stone.challenge_1.app.models.entity.User;
 import com.stone.challenge_1.app.models.repository.UserRepository;
 import com.stone.challenge_1.app.validators.UserValidator;

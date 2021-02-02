@@ -1,4 +1,4 @@
-package com.stone.challenge_1.app.controller.user.helpers.DTO;
+package com.stone.challenge_1.app.controller.user.DTO;
 
 
 public class TokenDTO {

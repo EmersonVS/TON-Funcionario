@@ -1,4 +1,4 @@
-package com.stone.challenge_1.app.controller.user.helpers.form;
+package com.stone.challenge_1.app.controller.user.form;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 

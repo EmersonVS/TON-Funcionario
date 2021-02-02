@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stone.challenge_1.app.controller.funcionario.form.FuncionarioForm;
 import com.stone.challenge_1.app.models.repository.FuncionarioRepository;
 import com.stone.challenge_1.app.validators.FuncionarioValidator;
 
@@ -36,7 +38,7 @@ public class FuncionarioController {
 
 	@ApiOperation("Create funcionario")
 	@PostMapping("/create")
-	public ResponseEntity<?> CreateFuncionario() {
+	public ResponseEntity<?> CreateFuncionario(@RequestBody FuncionarioForm funcionarioForm) {
 		return ResponseEntity.ok().build();
 	}
 
