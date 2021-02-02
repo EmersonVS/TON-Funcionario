@@ -11,9 +11,20 @@ public class Funcionario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long accountId;
-	private Integer idade;
 	private String nome;
 	private String cargo;
+	private Integer idade;
+
+	@Deprecated
+	public Funcionario() {
+
+	}
+
+	public Funcionario(String nome, String cargo, Integer idade) {
+		this.idade = idade;
+		this.nome = nome;
+		this.cargo = cargo;
+	}
 
 	public Long getAccountId() {
 		return accountId;
