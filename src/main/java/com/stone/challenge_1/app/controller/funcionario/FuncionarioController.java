@@ -1,9 +1,10 @@
-package com.stone.challenge_1.app.controller;
+package com.stone.challenge_1.app.controller.funcionario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,27 +22,27 @@ public class FuncionarioController {
 	private FuncionarioRepository funcionarioRepository;
 
 	@ApiOperation("Get funcionario info")
-	@GetMapping("/")
+	@GetMapping("/{id}")
 	public ResponseEntity<?> GetFuncionario() {
-		return null;
+		return ResponseEntity.ok().build();
 	}
 
 	@ApiOperation("Create funcionario")
-	@PostMapping("/")
+	@PostMapping("/create")
 	public ResponseEntity<?> CreateFuncionario() {
-		return null;
+		return ResponseEntity.ok().build();
 	}
 
 	@ApiOperation("Update funcionario info")
-	@PutMapping("/")
+	@PutMapping("/{id}")
 	public ResponseEntity<?> UpdateFuncionario() {
-		return null;
+		return ResponseEntity.ok().build();
 	}
 
-	@ApiOperation("Delte funcionario")
-	@DeleteMapping("/")
+	@ApiOperation("Delete funcionario")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> DeleteFuncionario() {
-		return null;
+		return ResponseEntity.ok().build();
 	}
 
 }
