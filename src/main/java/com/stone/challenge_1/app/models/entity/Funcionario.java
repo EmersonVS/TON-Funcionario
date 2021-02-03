@@ -10,7 +10,7 @@ public class Funcionario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long accountId;
+	private Long funcionarioId;
 	private String nome;
 	private String cargo;
 	private Integer idade;
@@ -26,8 +26,8 @@ public class Funcionario {
 		this.cargo = cargo;
 	}
 
-	public Long getAccountId() {
-		return accountId;
+	public Long getFuncionarioId() {
+		return funcionarioId;
 	}
 
 	public Integer getIdade() {
@@ -40,6 +40,18 @@ public class Funcionario {
 
 	public String getCargo() {
 		return cargo;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+
+	public void setIdade(Integer idade) {
+		this.idade = idade;
 	}
 
 }
