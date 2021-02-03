@@ -42,6 +42,7 @@ public class FuncionarioController {
 	@DeleteMapping("/")
 	public ResponseEntity<?> DeleteFuncionario() {
 		return null;
+		
 	}
 
 }
