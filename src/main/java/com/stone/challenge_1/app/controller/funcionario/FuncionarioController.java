@@ -1,5 +1,7 @@
 package com.stone.challenge_1.app.controller.funcionario;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import com.stone.challenge_1.app.controller.funcionario.DTO.FuncionarioDTO;
 import com.stone.challenge_1.app.controller.funcionario.form.FuncionarioForm;
 import com.stone.challenge_1.app.controller.funcionario.form.validation.PostFuncionarioValidation;
 import com.stone.challenge_1.app.controller.funcionario.form.validation.PutFuncionarioValidation;
@@ -34,9 +38,10 @@ public class FuncionarioController {
 
 	@ApiOperation("Get funcionario info")
 	@GetMapping("/{funcionarioID}")
-	public ResponseEntity<?> GetFuncionario(@PathVariable Long funcionarioID) {
+	public ResponseEntity<FuncionarioDTO> GetFuncionario(@PathVariable Long funcionarioID) {
 		if (funcionarioValidator.isFuncionarioCreated(funcionarioID)) {
-			return ResponseEntity.ok().build();
+			Funcionario databaseFuncionario = funcionarioRepository.getOne(funcionarioID);
+			return ResponseEntity.ok().body(new FuncionarioDTO(databaseFuncionario));
 		}
 		return ResponseEntity.notFound().build();
 	}
@@ -44,23 +49,24 @@ public class FuncionarioController {
 	@ApiOperation("Create funcionario")
 	@PostMapping("/create")
 	@Transactional
-	public ResponseEntity<?> CreateFuncionario(
-			@RequestBody @Validated(PostFuncionarioValidation.class) FuncionarioForm funcionarioForm) {
+	public ResponseEntity<FuncionarioDTO> CreateFuncionario(
+			@RequestBody @Validated(PostFuncionarioValidation.class) FuncionarioForm funcionarioForm, UriComponentsBuilder uriBuilder) {
 		Funcionario newFuncionario = funcionarioForm.MapAsFuncionarioEntity();
 		funcionarioRepository.save(newFuncionario);
-		return ResponseEntity.ok().build();
+		URI newUserURL = uriBuilder.path("/funcionario/{id}").buildAndExpand(newFuncionario.getFuncionarioId()).toUri();
+		return ResponseEntity.created(newUserURL).body(new FuncionarioDTO(newFuncionario));
 	}
 
 	@ApiOperation("Update funcionario info")
 	@PutMapping("/{funcionarioID}")
 	@Transactional
-	public ResponseEntity<?> UpdateFuncionario(@PathVariable Long funcionarioID,
+	public ResponseEntity<FuncionarioDTO> UpdateFuncionario(@PathVariable Long funcionarioID,
 			@RequestBody @Validated(PutFuncionarioValidation.class) FuncionarioForm funcionarioForm) {
 		if (funcionarioValidator.isFuncionarioCreated(funcionarioID)) {
 			Funcionario databaseFuncionario = funcionarioRepository.getOne(funcionarioID);
 			Funcionario updatedFuncionario = funcionarioForm.UpdateFuncionario(databaseFuncionario);
 			funcionarioRepository.save(updatedFuncionario);
-			return ResponseEntity.accepted().build();
+			return ResponseEntity.accepted().body(new FuncionarioDTO(updatedFuncionario));
 		}
 		return ResponseEntity.notFound().build();
 	}
@@ -68,10 +74,11 @@ public class FuncionarioController {
 	@ApiOperation("Delete funcionario")
 	@DeleteMapping("/{funcionarioID}")
 	@Transactional
-	public ResponseEntity<?> DeleteFuncionario(@PathVariable Long funcionarioID) {
+	public ResponseEntity<FuncionarioDTO> DeleteFuncionario(@PathVariable Long funcionarioID) {
 		if (funcionarioValidator.isFuncionarioCreated(funcionarioID)) {
-			funcionarioRepository.deleteById(funcionarioID);
-			return ResponseEntity.accepted().build();
+			Funcionario databaseFuncionario = funcionarioRepository.getOne(funcionarioID);
+			funcionarioRepository.delete(databaseFuncionario);
+			return ResponseEntity.accepted().body(new FuncionarioDTO(databaseFuncionario));
 		}
 		return ResponseEntity.notFound().build();
 	}
