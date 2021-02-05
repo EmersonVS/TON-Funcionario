@@ -11,7 +11,7 @@ import com.stone.challenge_1.app.models.entity.User;
 
 @SpringBootTest
 public class UserTest {
-	
+
 	private String usernameTeste = "UsernameTeste";
 	private String passwordTeste = "PasswordTeste";
 
@@ -20,24 +20,24 @@ public class UserTest {
 	void TestingFuncionarioEmptyConstructor() {
 		@SuppressWarnings("deprecation")
 		User newUser = new User();
-		assertEquals(newUser.getClass(), User.class);
-		assertNotEquals(newUser, null);
+		assertEquals(User.class, newUser.getClass());
+		assertNotEquals(null, newUser);
 	}
 
 	@Test
 	@DisplayName("Testing User constructor")
 	void TestingFuncionarioConstructor() {
 		User newUser = new User(usernameTeste, passwordTeste);
-		assertEquals(newUser.getClass(), User.class);
-		assertNotEquals(newUser, null);
+		assertEquals(User.class, newUser.getClass());
+		assertNotEquals(null, newUser);
 	}
 
 	@Test
 	@DisplayName("Testing User Getter")
 	void TestingFuncionarioGetters() {
 		User newUser = new User(usernameTeste, passwordTeste);
-		assertEquals(newUser.getUsername(), usernameTeste);
-		assertNotEquals(newUser.getPassword(), passwordTeste);
+		assertEquals(usernameTeste, newUser.getUsername());
+		assertNotEquals(passwordTeste, newUser.getPassword());
 	}
 
 	@Test
@@ -45,6 +45,6 @@ public class UserTest {
 	void TestingFuncionarioSetters() {
 		User newUser = new User(usernameTeste, passwordTeste);
 		String passwordTeste2 = "PasswordTeste2";
-		assertNotEquals(newUser.getPassword(), passwordTeste2);
+		assertNotEquals(passwordTeste2, newUser.getPassword());
 	}
 }
