@@ -1,5 +1,8 @@
 package com.stone.challenge_1.app.controller.funcionario.DTO;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.stone.challenge_1.app.models.entity.Funcionario;
 
 public class FuncionarioDTO {
@@ -31,6 +34,10 @@ public class FuncionarioDTO {
 
 	public Integer getIdade() {
 		return idade;
+	}
+	
+	public static List<FuncionarioDTO> MapFuncionaioListAsFuncionarioDTOList(List<Funcionario> databaseFuncionarios) {
+		return databaseFuncionarios.stream().map(FuncionarioDTO::new).collect(Collectors.toList());
 	}
 
 }

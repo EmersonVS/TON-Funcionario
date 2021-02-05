@@ -1,5 +1,6 @@
 package com.stone.challenge_1.app.validators;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,13 @@ public class FuncionarioValidator {
 		}
 		return false;
 	}
-	
+
+	public boolean isAnyFuncionarioCreated() {
+		List<Funcionario> databaseFuncionarios = funcionarioRepository.findAll();
+		if (databaseFuncionarios.size() > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }
