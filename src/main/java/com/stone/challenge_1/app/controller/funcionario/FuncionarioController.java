@@ -1,6 +1,7 @@
 package com.stone.challenge_1.app.controller.funcionario;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,16 @@ public class FuncionarioController {
 		if (funcionarioValidator.isFuncionarioCreated(funcionarioID)) {
 			Funcionario databaseFuncionario = funcionarioRepository.getOne(funcionarioID);
 			return ResponseEntity.ok().body(new FuncionarioDTO(databaseFuncionario));
+		}
+		return ResponseEntity.notFound().build();
+	}
+	
+	@ApiOperation("Get all funcionarios info")
+	@GetMapping("/all")
+	public ResponseEntity<List<FuncionarioDTO>> GetFuncionarios() {
+		if (funcionarioValidator.isAnyFuncionarioCreated()) {
+			List<Funcionario> databaseFuncionarios = funcionarioRepository.findAll();
+			return ResponseEntity.ok().body(FuncionarioDTO.MapFuncionaioListAsFuncionarioDTOList(databaseFuncionarios));
 		}
 		return ResponseEntity.notFound().build();
 	}
