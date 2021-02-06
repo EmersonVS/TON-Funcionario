@@ -54,4 +54,8 @@ public class Funcionario {
 		this.idade = idade;
 	}
 
+	public void setFuncionarioId(Long funcionarioId) {
+		this.funcionarioId = funcionarioId;
+	}
+
 }

@@ -21,5 +21,13 @@ public class UserValidator {
 		}
 		return false;
 	}
+	
+	public boolean isUserCreated(String requestedUsername) {
+		Optional<User> databaseUser = userRepository.findById(requestedUsername);
+		if (databaseUser.isPresent()) {
+			return true;
+		}
+		return false;
+	}
 
 }
