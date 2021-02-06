@@ -16,14 +16,23 @@ public class UserForm {
 	public String getPassword() {
 		return password;
 	}
-	
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public User mapAsUser() {
 		User newUser = new User(this.username, this.password);
 		return newUser;
 	}
-	
+
 	public UsernamePasswordAuthenticationToken mapAsUsernamePasswordAuthenticationToken() {
-		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(this.username, this.password);
+		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+				this.username, this.password);
 		return usernamePasswordAuthenticationToken;
 	}
 

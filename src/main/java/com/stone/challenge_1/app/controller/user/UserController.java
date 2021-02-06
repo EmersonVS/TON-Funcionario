@@ -36,10 +36,10 @@ public class UserController {
 
 	@PostMapping("/register")
 	public ResponseEntity<?> CreateUser(@RequestBody UserForm userForm) {
-		User newUser = userForm.mapAsUser();
-		if(userValidator.isUserCreated(newUser)) {
+		if(userValidator.isUserCreated(userForm.getUsername())) {
 			return ResponseEntity.status(400).build();
 		}
+		User newUser = userForm.mapAsUser();
 		userRepository.save(newUser);
 		return ResponseEntity.status(201).build();
 	}
