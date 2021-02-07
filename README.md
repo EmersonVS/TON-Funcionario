@@ -63,3 +63,13 @@ Endpoints de criação de usuário e autenticação estão disponíveis para tod
 Testes mockados para validar retorno dos endpoints existentes.
 #### Models
 Testes para validar métodos das classes utilizadas para comunicação com banco de dados.
+
+## Como rodar
+
+Necessário ter instalado <a href="https://www.oracle.com/br/java/technologies/javase-jdk11-downloads.html">Java 11</a>, <a href="https://maven.apache.org/download.cgi">Maven</a> e <a href="https://docs.docker.com/">Docker</a>.
+
+1. Clone o repositório.
+2. Alterar configurações do banco dados que se encontram no application.properties.
+3. Acessar o diretório do projeto e executar o seguinte comando <i>mvn spring-boot:build-image</i>.
+4. Executar comando para iniciar imagem <i>docker run --tty --publish 8080:8080 {{nome do arquivo gerado}}</i>.
+5. Alterar o hostname nas variáveis de ambiente da collection e acessar endpoints.

@@ -1,0 +1,319 @@
+{
+	"info": {
+		"_postman_id": "98515cdd-6e46-4c93-8b06-efcd4fd6a8d3",
+		"name": "TON-Funcionario",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UserController",
+			"item": [
+				{
+					"name": "local - Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/user/register",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "local - Authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/user/authenticate",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"user",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FuncionarioController",
+			"item": [
+				{
+					"name": "local - GET Funcionario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostname}}/funcionario/1",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"funcionario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "local - GET Funcionarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{hostname}}/funcionario/all",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"funcionario",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "local - POST Funcionario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idade\": 21,\r\n    \"cargo\": \"Cloud Engineer\",\r\n    \"nome\": \"Emerson Valentim dos Santos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/funcionario/create",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"funcionario",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "local - PUT Funcionario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idade\": 21,\r\n    \"nome\": \"Emerson Valentim dos Santos\",\r\n    \"cargo\": \"DevOps Engineer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{hostname}}/funcionario/1",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"funcionario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "local - DELETE Funcionario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{hostname}}/funcionario/1",
+							"host": [
+								"{{hostname}}"
+							],
+							"path": [
+								"funcionario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.sendRequest(",
+							"    {",
+							"        url: `${pm.collectionVariables.get('hostname')}/user/authenticate`,",
+							"        method: 'POST',",
+							"        header: {",
+							"            'content-type': 'application/json',",
+							"        },",
+							"        body: {",
+							"            mode: 'raw',",
+							"            raw: JSON.stringify({",
+							"                username: pm.collectionVariables.get('username'),",
+							"                password: pm.collectionVariables.get('password')",
+							"            })",
+							"        }",
+							"    }, ",
+							"    function (err, res) {",
+							"        let body = res.json();",
+							"        pm.collectionVariables.set(\"token\", body.token);",
+							"    }",
+							");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "hostname",
+			"value": "HOSTNAME"
+		},
+		{
+			"key": "username",
+			"value": "tonUser"
+		},
+		{
+			"key": "password",
+			"value": "tonPassword"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
